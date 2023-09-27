@@ -29,29 +29,38 @@ const show = (req, res, next) => {
 
 }
 
-const store = (req, res, next) =>{
-    let employee =new Employee({
+const store = (req, res, next) => {
+    let employee = new Employee({
         name: req.body.name,
         designation: req.body.designation,
         age: req.body.age,
         email: req.body.email,
-        phone:req.body.phone
-    })
-    if(req.file){
-        employee.avarta = req.file.path
-    }
-    employee.save()
-    .then (response =>{
-        res.json({
-            'message':'Data is Saved in database'
-        })
-    }).catch (error => {
-        res.json({
-            message:'error occured'
-        })
-    })
-}
+        phone: req.body.phone
+    });
 
+    if (req.files && req.files.length > 0) {
+        let path = ''
+        req.files.forEach(function (file, index, arr) {
+            path = path + file.path + ','
+        });
+        path = path.substring(0, path.lastIndexOf(','))
+     console.log("path data log")
+        employee.avatar = path; // Assuming your schema has a field named 'avatar' for storing file paths.
+        console.log(`path data log ${path}`)
+    }
+
+    employee.save()
+        .then(response => {
+            res.json({
+                'message': 'Data is saved in the database'
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: 'Error occurred while saving data'
+            });
+        });
+};
 
 
  const update = (req, res, next) =>{
