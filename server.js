@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const employeeRouter = require('./routes/Employee');
 
-mongoose.connect('mongodb://localhost:27017/testdb', {
+mongoose.connect('mongodb://127.0.0.1:27017/testdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -33,6 +33,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Internal Server Error' });
 });
+app.use('/uploads',express.static('uploads'))
 
 const PORT = process.env.PORT || 3000;
 

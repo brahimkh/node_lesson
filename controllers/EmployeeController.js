@@ -34,8 +34,12 @@ const store = (req, res, next) =>{
         name: req.body.name,
         designation: req.body.designation,
         age: req.body.age,
-        email: req.body.email
+        email: req.body.email,
+        phone:req.body.phone
     })
+    if(req.file){
+        employee.avarta = req.file.path
+    }
     employee.save()
     .then (response =>{
         res.json({

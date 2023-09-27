@@ -13,6 +13,12 @@ const employeeSchema  =new Schema({
     },
     age:{
         type: String
+    },
+    avarta:{
+        type: String
+    },
+    phone:{
+      type: String
     }
 },{timestamps: true})
 const Employee =mongoose.model('Employee', employeeSchema)
