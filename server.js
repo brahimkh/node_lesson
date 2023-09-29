@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const employeeRouter = require('./routes/Employee');
+const AuthRouter = require('./routes/Auth');
 
 mongoose.connect('mongodb://127.0.0.1:27017/testdb', {
   useNewUrlParser: true,
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 
 // Define a route prefix for employee-related routes
 app.use('/api/employee', employeeRouter);
+app.use('/api/auth', AuthRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

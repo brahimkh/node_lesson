@@ -39,14 +39,12 @@ const store = (req, res, next) => {
     });
 
     if (req.files && req.files.length > 0) {
-        let path = ''
-        req.files.forEach(function (file, index, arr) {
-            path = path + file.path + ','
+        let path = '';
+        req.files.forEach((item, index) => {
+            path = path + item.path + ',';
         });
-        path = path.substring(0, path.lastIndexOf(','))
-     console.log("path data log")
-        employee.avatar = path; // Assuming your schema has a field named 'avatar' for storing file paths.
-        console.log(`path data log ${path}`)
+        path = path.substring(0, path.lastIndexOf(","));
+        employee.avarta = path;
     }
 
     employee.save()
